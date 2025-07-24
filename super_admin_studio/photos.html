@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-900">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photos - Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="assets/css/common.css">
+</head>
+<body class="h-full">
+    <div class="flex h-screen bg-gray-900">
+      <!-- Sidebar -->
+      <aside id="sidebar-container" class="w-20 md:w-72 flex-shrink-0 flex flex-col bg-gray-950 border-r border-gray-800 py-6 px-2 md:px-4 relative z-20 shadow-2xl rounded-r-3xl"></aside>
+      <!-- Main Content -->
+      <main class="flex-1 p-6 md:p-10 overflow-y-auto">
+        <!-- Photos Page -->
+        <section>
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-1 flex items-center gap-3"><i class="ph ph-camera"></i> Photos</h1>
+        <div class="text-gray-400 text-sm">67 photos</div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-gray-400 text-sm">View as:</span>
+        <button class="p-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"><i class="ph ph-grid-four"></i></button>
+        <button class="p-2 rounded-lg bg-gray-900 text-gray-400 hover:bg-gray-700 hover:text-white transition"><i class="ph ph-list"></i></button>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+      <div class="relative group">
+        <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=300&q=80" alt="Landscape" class="w-full h-40 object-cover rounded-lg transition-transform group-hover:scale-105" />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-start p-2">
+            <p class="text-white text-sm font-semibold">Golden Hour</p>
+        </div>
+      </div>
+      <div class="relative group">
+        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=300&q=80" alt="Concert" class="w-full h-40 object-cover rounded-lg transition-transform group-hover:scale-105" />
+         <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-start p-2">
+            <p class="text-white text-sm font-semibold">Live Performance</p>
+        </div>
+      </div>
+       <div class="relative group">
+        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=300&q=80" alt="Laptop with code" class="w-full h-40 object-cover rounded-lg transition-transform group-hover:scale-105" />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-start p-2">
+            <p class="text-white text-sm font-semibold">Development Setup</p>
+        </div>
+      </div>
+      <div class="relative group">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" alt="Portrait of a woman" class="w-full h-40 object-cover rounded-lg transition-transform group-hover:scale-105" />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-start p-2">
+            <p class="text-white text-sm font-semibold">Smiling Woman</p>
+        </div>
+      </div>
+       <div class="relative group">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ab?auto=format&fit=crop&w=300&q=80" alt="Red sneaker" class="w-full h-40 object-cover rounded-lg transition-transform group-hover:scale-105" />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-start p-2">
+            <p class="text-white text-sm font-semibold">Nike Shoe</p>
+        </div>
+      </div>
+       <div class="relative group">
+        <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=300&q=80" alt="Person coding" class="w-full h-40 object-cover rounded-lg transition-transform group-hover:scale-105" />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-start p-2">
+            <p class="text-white text-sm font-semibold">Late Night Coding</p>
+        </div>
+      </div>
+      <div class="relative group">
+        <img src="https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&w=300&q=80" alt="Motorbike" class="w-full h-40 object-cover rounded-lg transition-transform group-hover:scale-105" />
+         <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-start p-2">
+            <p class="text-white text-sm font-semibold">Custom Bike</p>
+        </div>
+      </div>
+       <div class="relative group">
+        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=300&q=80" alt="Abstract gradient" class="w-full h-40 object-cover rounded-lg transition-transform group-hover:scale-105" />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-start p-2">
+            <p class="text-white text-sm font-semibold">Colorful Gradient</p>
+        </div>
+      </div>
+      <div class="relative group">
+        <img src="https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&w=300&q=80" alt="Code on a screen" class="w-full h-40 object-cover rounded-lg transition-transform group-hover:scale-105" />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-start p-2">
+            <p class="text-white text-sm font-semibold">Source Code</p>
+        </div>
+      </div>
+      <div class="relative group">
+        <img src="https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?auto=format&fit=crop&w=300&q=80" alt="Coastal view" class="w-full h-40 object-cover rounded-lg transition-transform group-hover:scale-105" />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-start p-2">
+            <p class="text-white text-sm font-semibold">Big Sur</p>
+        </div>
+      </div>
+      <div class="relative group">
+        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=300&q=80" alt="Matrix code" class="w-full h-40 object-cover rounded-lg transition-transform group-hover:scale-105" />
+         <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-start p-2">
+            <p class="text-white text-sm font-semibold">The Matrix</p>
+        </div>
+      </div>
+      <div class="relative group">
+        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=300&q=80" alt="Close up of code" class="w-full h-40 object-cover rounded-lg transition-transform group-hover:scale-105" />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-start p-2">
+            <p class="text-white text-sm font-semibold">HTML Code</p>
+        </div>
+      </div>
+    </div>
+</section>
+      </main>
+    </div>
+    <script src="assets/js/common.js" defer></script>
+</body>
+</html> 

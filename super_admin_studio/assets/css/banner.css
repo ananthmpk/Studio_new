@@ -1,0 +1,65 @@
+/**
+ * Banner specific styles
+ */
+
+/* Toggle switch styling */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-card);
+    transition: var(--transition-normal);
+    border-radius: 34px;
+    border: 1px solid var(--border-color);
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    transition: var(--transition-normal);
+    border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+    background-color: var(--primary);
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(20px);
+}
+
+/* Banner thumbnail */
+.banner-thumbnail {
+    width: 64px;
+    height: 48px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--bg-card);
+}
+
+.banner-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+} 

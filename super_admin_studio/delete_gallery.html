@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-900">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Gallery Item - Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="assets/css/common.css">
+</head>
+<body class="h-full">
+    <div class="flex h-screen bg-gray-900">
+      <!-- Sidebar -->
+      <aside id="sidebar-container" class="w-20 md:w-72 flex-shrink-0 flex flex-col bg-gray-950 border-r border-gray-800 py-6 px-2 md:px-4 relative z-20 shadow-2xl rounded-r-3xl"></aside>
+      <!-- Main Content -->
+      <main class="flex-1 p-6 md:p-10 overflow-y-auto">
+        <!-- Delete Confirmation Page -->
+        <section>
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+            <div>
+              <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-1 flex items-center gap-3">
+                <i class="ph ph-trash"></i> Delete Gallery Item
+              </h1>
+              <div class="text-gray-400 text-sm">Confirm deletion of this item</div>
+            </div>
+            <div class="flex items-center gap-2">
+              <a href="manage_gallery.html" class="flex items-center gap-2 text-gray-400 hover:text-white text-sm font-medium px-3 py-2 rounded-lg transition">
+                <i class="ph ph-arrow-left"></i> Back to Gallery
+              </a>
+            </div>
+          </div>
+          
+          <!-- Delete Confirmation -->
+          <div class="bg-gray-950/50 backdrop-blur-sm rounded-2xl border border-gray-800 shadow-2xl overflow-hidden">
+            <div class="p-6 md:p-8">
+              <div class="flex flex-col md:flex-row gap-8 items-center">
+                <!-- Image Preview -->
+                <div class="w-full md:w-1/3 lg:w-1/4">
+                  <div class="relative rounded-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Image to delete" class="w-full aspect-square object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-3 left-3 right-3"><div class="text-lg font-bold text-white drop-shadow">Coastal Mist</div></div>
+                  </div>
+                </div>
+                
+                <!-- Confirmation Message -->
+                <div class="flex-1">
+                  <div class="bg-red-900/20 border border-red-800 rounded-lg p-4 mb-6">
+                    <div class="flex items-start">
+                      <div class="flex-shrink-0">
+                        <i class="ph ph-warning-circle text-red-400 text-xl"></i>
+                      </div>
+                      <div class="ml-3">
+                        <h3 class="text-lg font-medium text-red-400">Warning: This action cannot be undone</h3>
+                        <div class="mt-2 text-sm text-gray-300">
+                          <p>You are about to delete the gallery item "Coastal Mist". This will permanently remove the item from your gallery and cannot be recovered.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="space-y-4">
+                    <div>
+                      <label for="confirm" class="flex items-center">
+                        <input type="checkbox" id="confirm" class="rounded bg-gray-800 border-gray-700 text-blue-600 focus:ring-blue-500">
+                        <span class="ml-2 text-sm text-gray-300">I understand that this action cannot be undone</span>
+                      </label>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3">
+                      <button type="button" onclick="window.location.href='manage_gallery.html'" class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Cancel
+                      </button>
+                      <button id="delete-btn" type="button" disabled class="bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center opacity-50 cursor-not-allowed">
+                        Delete Permanently
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="assets/js/common.js" defer></script>
+    <script>
+      // Enable/disable delete button based on checkbox
+      document.getElementById('confirm').addEventListener('change', function() {
+        const deleteBtn = document.getElementById('delete-btn');
+        if (this.checked) {
+          deleteBtn.disabled = false;
+          deleteBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        } else {
+          deleteBtn.disabled = true;
+          deleteBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+      });
+      
+      // Handle delete button click
+      document.getElementById('delete-btn').addEventListener('click', function() {
+        if (!this.disabled) {
+          // In a real app, this would send a delete request to the server
+          alert('Item deleted successfully!');
+          window.location.href = 'manage_gallery.html';
+        }
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-900">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Instagram Photo - Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="assets/css/common.css">
+</head>
+<body class="h-full">
+    <div class="flex h-screen bg-gray-900">
+      <!-- Sidebar -->
+      <aside id="sidebar-container" class="w-20 md:w-72 flex-shrink-0 flex flex-col bg-gray-950 border-r border-gray-800 py-6 px-2 md:px-4 relative z-20 shadow-2xl rounded-r-3xl"></aside>
+      <!-- Main Content -->
+      <main class="flex-1 p-6 md:p-10 overflow-y-auto">
+        <!-- Delete Instagram Photo Page -->
+        <section>
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+            <div>
+              <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-1 flex items-center gap-3">
+                <i class="ph ph-trash"></i> Delete Instagram Photo
+              </h1>
+              <div class="text-gray-400 text-sm">Confirm deletion of Instagram photo</div>
+            </div>
+            <div class="flex items-center gap-2 md:gap-4 mt-2 md:mt-0">
+              <a href="manage_insta_img.html" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-5 py-2 rounded-lg shadow transition flex items-center gap-2">
+                <i class="ph ph-arrow-left"></i> Back
+              </a>
+            </div>
+          </div>
+          
+          <!-- Delete Photo Confirmation -->
+          <div class="bg-gray-800 rounded-xl p-6 mb-8 max-w-3xl mx-auto">
+            <div class="text-center mb-6">
+              <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-900/30 text-red-500 mb-4">
+                <i class="ph ph-warning text-4xl"></i>
+              </div>
+              <h2 class="text-2xl font-bold text-white mb-2" id="photoTitle">Delete "Nature Beauty"?</h2>
+              <p class="text-gray-400">This action cannot be undone. This will permanently delete the photo from your Instagram gallery.</p>
+            </div>
+            
+            <div class="flex justify-center mb-6">
+              <div class="w-40 h-40 rounded-lg overflow-hidden">
+                <img id="photoPreview" src="https://source.unsplash.com/random/600x600?nature" alt="Photo Preview" class="w-full h-full object-cover">
+              </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-3">
+              <a href="manage_insta_img.html" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-6 py-3 rounded-lg shadow transition text-center">
+                Cancel
+              </a>
+              <button id="confirmDelete" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition flex items-center justify-center gap-2">
+                <i class="ph ph-trash"></i> Delete Permanently
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="assets/js/common.js" defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Get photo ID from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const photoId = urlParams.get('id');
+        
+        if (photoId) {
+          document.getElementById('photoTitle').textContent = `Delete "${photoId}"?`;
+        }
+        
+        // Delete confirmation
+        const confirmDeleteBtn = document.getElementById('confirmDelete');
+        
+        confirmDeleteBtn.addEventListener('click', function() {
+          // Here you would normally send an AJAX request to delete the photo
+          console.log(`Deleting photo: ${photoId}`);
+          
+          // Show loading state
+          this.disabled = true;
+          this.innerHTML = '<i class="ph ph-circle-notch ph-spin"></i> Deleting...';
+          
+          // Simulate API request
+          setTimeout(() => {
+            // Show success message
+            alert('Photo deleted successfully!');
+            
+            // Redirect back to manage page
+            window.location.href = 'manage_insta_img.html';
+          }, 1000);
+        });
+      });
+    </script>
+</body>
+</html>
