@@ -23,7 +23,7 @@
               <div class="text-gray-400 text-sm">24 photos</div>
             </div>
             <div class="flex items-center gap-2 md:gap-4 mt-2 md:mt-0">
-              <a href="add_images.html" id="addNewButton" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow transition flex items-center gap-2">
+              <a href="add_images.php" id="addNewButton" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow transition flex items-center gap-2">
                 <i class="ph ph-plus"></i> Add new
               </a>
             </div>
@@ -57,10 +57,10 @@
                 <div class="relative">
                   <button class="bg-gray-900/70 hover:bg-gray-800 text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
                   <div class="dropdown-menu hidden absolute right-0 mt-1 w-32 bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10">
-                    <a href="edit_gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
+                    <a href="edit_gallery.php" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                       <i class="ph ph-pencil"></i> Edit
                     </a>
-                    <a href="delete_gallery.html" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                    <a href="delete_gallery.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                       <i class="ph ph-trash"></i> Delete
                     </a>
                   </div>
@@ -76,10 +76,10 @@
                   <div class="relative">
                     <button class="bg-gray-900/70 hover:bg-gray-800 text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
                     <div class="dropdown-menu hidden absolute right-0 mt-1 w-32 bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10">
-                      <a href="edit_gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="edit_gallery.php" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-pencil"></i> Edit
                       </a>
-                      <a href="delete_gallery.html" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="delete_gallery.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-trash"></i> Delete
                       </a>
                     </div>
@@ -95,10 +95,10 @@
                   <div class="relative">
                     <button class="bg-gray-900/70 hover:bg-gray-800 text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
                     <div class="dropdown-menu hidden absolute right-0 mt-1 w-32 bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10">
-                      <a href="edit_gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="edit_gallery.php" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-pencil"></i> Edit
                       </a>
-                      <a href="delete_gallery.html" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="delete_gallery.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-trash"></i> Delete
                       </a>
                     </div>
@@ -114,10 +114,10 @@
                   <div class="relative">
                     <button class="bg-gray-900/70 hover:bg-gray-800 text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
                     <div class="dropdown-menu hidden absolute right-0 mt-1 w-32 bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10">
-                      <a href="edit_gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="edit_gallery.php" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-pencil"></i> Edit
                       </a>
-                      <a href="delete_gallery.html" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="delete_gallery.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-trash"></i> Delete
                       </a>
                     </div>
@@ -136,10 +136,10 @@
                   <div class="relative">
                     <button class="bg-gray-900/70 hover:bg-gray-800 text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
                     <div class="dropdown-menu hidden absolute right-0 mt-1 w-32 bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10">
-                      <a href="edit_gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="edit_gallery.php" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-pencil"></i> Edit
                       </a>
-                      <a href="delete_gallery.html" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="delete_gallery.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-trash"></i> Delete
                       </a>
                     </div>
@@ -155,10 +155,10 @@
                   <div class="relative">
                     <button class="bg-gray-900/70 hover:bg-gray-800 text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
                     <div class="dropdown-menu hidden absolute right-0 mt-1 w-32 bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10">
-                      <a href="edit_gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="edit_gallery.php" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-pencil"></i> Edit
                       </a>
-                      <a href="delete_gallery.html" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="delete_gallery.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-trash"></i> Delete
                       </a>
                     </div>
@@ -177,10 +177,10 @@
                   <div class="relative">
                     <button class="bg-gray-900/70 hover:bg-gray-800 text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
                     <div class="dropdown-menu hidden absolute right-0 mt-1 w-32 bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10">
-                      <a href="edit_gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="edit_gallery.php" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-pencil"></i> Edit
                       </a>
-                      <a href="delete_gallery.html" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="delete_gallery.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-trash"></i> Delete
                       </a>
                     </div>
@@ -196,10 +196,10 @@
                   <div class="relative">
                     <button class="bg-gray-900/70 hover:bg-gray-800 text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
                     <div class="dropdown-menu hidden absolute right-0 mt-1 w-32 bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10">
-                      <a href="edit_gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="edit_gallery.php" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-pencil"></i> Edit
                       </a>
-                      <a href="delete_gallery.html" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="delete_gallery.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-trash"></i> Delete
                       </a>
                     </div>
@@ -216,10 +216,10 @@
                   <div class="relative">
                     <button class="bg-gray-900/70 hover:bg-gray-800 text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
                     <div class="dropdown-menu hidden absolute right-0 mt-1 w-32 bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10">
-                      <a href="edit_gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="edit_gallery.php" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-pencil"></i> Edit
                       </a>
-                      <a href="delete_gallery.html" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="delete_gallery.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-trash"></i> Delete
                       </a>
                     </div>
@@ -235,10 +235,10 @@
                   <div class="relative">
                     <button class="bg-gray-900/70 hover:bg-gray-800 text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
                     <div class="dropdown-menu hidden absolute right-0 mt-1 w-32 bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10">
-                      <a href="edit_gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="edit_gallery.php" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-pencil"></i> Edit
                       </a>
-                      <a href="delete_gallery.html" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="delete_gallery.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-trash"></i> Delete
                       </a>
                     </div>
@@ -254,10 +254,10 @@
                   <div class="relative">
                     <button class="bg-gray-900/70 hover:bg-gray-800 text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
                     <div class="dropdown-menu hidden absolute right-0 mt-1 w-32 bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10">
-                      <a href="edit_gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="edit_gallery.php" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-pencil"></i> Edit
                       </a>
-                      <a href="delete_gallery.html" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                      <a href="delete_gallery.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                         <i class="ph ph-trash"></i> Delete
                       </a>
                     </div>
