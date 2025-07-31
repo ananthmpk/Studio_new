@@ -69,7 +69,7 @@ include("includes.php");
                     <a href="edit_gallery.php?id=<?php echo $gal['gal_id']; ?>" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                       <i class="ph ph-pencil"></i> Edit
                     </a>
-                    <a href="delete_gallery.php?id=<?php echo $gal['gal_id']; ?>" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                    <a href="delete_gallery.php?id=<?php echo $gal['gal_id']; ?>" onclick="return confirm('Are you sure you want to delete this item? This action cannot be undone!')" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                       <i class="ph ph-trash"></i> Delete
                     </a>
                   </div>

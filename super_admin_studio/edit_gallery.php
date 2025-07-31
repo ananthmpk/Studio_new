@@ -88,9 +88,13 @@ if(isset($_POST['submit'])){
 
                   echo "<script>window.alert('Update Successfully');</script>";
 
+                  echo "<script>window.location.assign('manage_gallery.php');</script>";
+
                }else{
 
                 echo "<script>window.alert('DB insert failed: " . mysqli_error($conn) . "');</script>";
+
+                echo "<script>window.location.assign('manage_gallery.php');</script>";
 
                }
 

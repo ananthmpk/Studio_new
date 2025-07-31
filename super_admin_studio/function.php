@@ -92,6 +92,24 @@ function getGalleryDetailsByid($gal_id){
     }
 }
 
+// delete image details by id
+
+function deleteImage($gal_id){
+
+    $qry = "DELETE FROM studio_gallery WHERE gal_id='$gal_id'";
+    $delete = mysqli_query($GLOBALS['conn'],$qry);
+
+    if($delete){
+
+        return true;
+
+    }else{
+
+        return false;
+
+    }
+}
+
 
 
 
