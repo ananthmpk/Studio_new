@@ -41,7 +41,7 @@ if(isset($_POST['submit'])) {
         // Move file
         if (move_uploaded_file($file_tmp, $upload_path)) {
             // DB insert
-            $qry = "INSERT INTO studio_gallery (cat_id, file_path) VALUES ('$category', '$upload_path')";
+            $qry = "INSERT INTO studio_gallery (cat_id, file_path) VALUES ('$category', '$new_file_name')";
             $run = mysqli_query($conn, $qry);
 
             if (!$run) {

@@ -1,3 +1,7 @@
+<?php
+include("includes.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-900">
 <head>
@@ -49,26 +53,34 @@
           
           <!-- Gallery Grid -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 gallery-grid">
+            <?php
+            $gallery = getAllGalleryDetails();
+
+            foreach($gallery as $gal){
+            ?>
             <div class="relative rounded-2xl overflow-hidden shadow-lg bg-gray-800 group gallery-item" data-category="nature">
-              <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Coastal landscape" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+              <img src="assets/images/gallery/<?php echo $gal['file_path'] ?>" alt="gallery" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-              <div class="absolute top-3 left-3 bg-gray-900/80 text-white text-xs px-2 py-0.5 rounded-full">Photo • 20 Jan 2024</div>
+              <div class="absolute top-3 left-3 bg-gray-900/80 text-white text-xs px-2 py-0.5 rounded-full">Photo • <?php echo $gal['created_at']; ?></div>
               <div class="absolute top-3 right-3">
                 <div class="relative">
-                  <button class="bg-gray-900/70 hover:bg-gray-800 text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
+                  <button class="text-white p-1.5 rounded-full" onclick="toggleDropdown(this)"><i class="ph ph-dots-three-outline"></i></button>
                   <div class="dropdown-menu hidden absolute right-0 mt-1 w-32 bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10">
-                    <a href="edit_gallery.php" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
+                    <a href="edit_gallery.php?id=<?php echo $gal['gal_id']; ?>" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center gap-2">
                       <i class="ph ph-pencil"></i> Edit
                     </a>
-                    <a href="delete_gallery.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
+                    <a href="delete_gallery.php?id=<?php echo $gal['gal_id']; ?>" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2">
                       <i class="ph ph-trash"></i> Delete
                     </a>
                   </div>
                 </div>
               </div>
-              <div class="absolute bottom-3 left-3 right-3"><div class="text-lg font-bold text-white drop-shadow">Coastal Mist</div></div>
+              <div class="absolute bottom-3 left-3 right-3"><div class="text-lg font-bold text-white drop-shadow"><?php echo $gal['title']; ?></div></div>
             </div>
-            <div class="relative rounded-2xl overflow-hidden shadow-lg bg-gray-800 group gallery-item" data-category="nature">
+            <?php
+            }
+            ?>
+            <!-- <div class="relative rounded-2xl overflow-hidden shadow-lg bg-gray-800 group gallery-item" data-category="nature">
                 <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=400&q=80" alt="Forest path" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                 <div class="absolute top-3 left-3 bg-gray-900/80 text-white text-xs px-2 py-0.5 rounded-full">Photo • 15 Feb 2024</div>
@@ -206,9 +218,9 @@
                   </div>
                 </div>
                 <div class="absolute bottom-3 left-3 right-3"><div class="text-lg font-bold text-white drop-shadow">Lavender Dreams</div></div>
-            </div>
+            </div> -->
             <!-- Add more items for pagination demo -->
-            <div class="relative rounded-2xl overflow-hidden shadow-lg bg-gray-800 group gallery-item" data-category="animals">
+            <!-- <div class="relative rounded-2xl overflow-hidden shadow-lg bg-gray-800 group gallery-item" data-category="animals">
                 <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&w=400&q=80" alt="A colorful macaw" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                 <div class="absolute top-3 left-3 bg-gray-900/80 text-white text-xs px-2 py-0.5 rounded-full">Photo • 12 Jun 2024</div>
@@ -264,7 +276,7 @@
                   </div>
                 </div>
                 <div class="absolute bottom-3 left-3 right-3"><div class="text-lg font-bold text-white drop-shadow">Vintage Classic</div></div>
-            </div>
+            </div> -->
           </div>
           
           <!-- No Results Message - will only show when needed -->

@@ -56,6 +56,41 @@ function deleteCategory($cat_id){
     }
 }
 
+//Get all image details
+
+function getAllGalleryDetails(){
+    
+    $arr = [];
+
+    $qry = "SELECT * FROM studio_gallery ORDER BY gal_id DESC";
+    $run = mysqli_query($GLOBALS['conn'],$qry);
+
+    while($row = mysqli_fetch_array($run)){
+        $arr[] = $row;
+    }
+
+    return $arr;
+}
+
+// Get gallery details by id
+
+function getGalleryDetailsByid($gal_id){
+
+    $qry = "SELECT * FROM studio_gallery WHERE gal_id='$gal_id'";
+    $run = mysqli_query($GLOBALS['conn'],$qry);
+    $num = mysqli_num_rows($run);
+
+    if($num > 0){
+        $row = mysqli_fetch_array($run);
+        
+        return $row;
+
+    }else{
+
+        return false;
+        
+    }
+}
 
 
 
@@ -75,4 +110,3 @@ function deleteCategory($cat_id){
 
 
 
-?>
