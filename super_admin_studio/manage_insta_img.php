@@ -1,3 +1,7 @@
+<?php
+include("includes.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-900">
 <head>
@@ -25,7 +29,7 @@
               <div class="text-gray-400 text-sm">Manage your Instagram photos</div>
             </div>
             <div class="flex items-center gap-2 md:gap-4 mt-2 md:mt-0">
-              <a href="add_insta_img.html" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow transition flex items-center gap-2">
+              <a href="add_insta_img.php" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow transition flex items-center gap-2">
                 <i class="ph ph-plus"></i> Add Photo
               </a>
             </div>
@@ -42,6 +46,11 @@
           <!-- Instagram Gallery Grid -->
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8 gallery-grid">
             <!-- Photo Item 1 -->
+             <?php 
+              $arr = getAllInstaImages();
+
+              foreach($arr as $ar){
+             ?>
             <div class="bg-gray-800 rounded-xl overflow-hidden group relative gallery-item" data-category="people">
               <!-- Action Menu -->
               <div class="action-menu">
@@ -50,220 +59,28 @@
                     <i class="ph ph-dots-three-vertical"></i>
                   </button>
                   <div class="dropdown-content">
-                    <a href="edit_insta_img.html?id=Coffee Time" class="hover:bg-gray-700">
+                    <a href="edit_insta_img.php?id=<?php echo $ar['id'] ?>" class="hover:bg-gray-700">
                       <i class="ph ph-pencil-simple"></i> Edit
                     </a>
-                    <a href="javascript:void(0)" onclick="confirmDelete('Coffee Time')" class="hover:bg-red-700">
+                    <a href="delete_insta_img.php?id=<?php echo $ar['id'] ?>"  onclick="return confirm('Are you sure you want to delete this item?')" class="hover:bg-red-700">
                       <i class="ph ph-trash"></i> Delete
                     </a>
                   </div>
                 </div>
               </div>
               <div class="aspect-square overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=400&q=80" alt="Instagram Photo" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                <img src="assets/images/instagram/<?php echo $ar['file_path'] ?>" alt="Instagram Photo" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
               </div>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                 <div class="flex items-center justify-between">
-                  <div class="text-white font-medium truncate">Coffee Time</div>
+                  <div class="text-white font-medium truncate"><?php echo $ar['title'] ?></div>
                 </div>
               </div>
             </div>
+            <?php
+              }
+            ?>
             
-            <!-- Photo Item 2 -->
-            <div class="bg-gray-800 rounded-xl overflow-hidden group relative gallery-item" data-category="travel">
-              <!-- Action Menu -->
-              <div class="action-menu">
-                <div class="dropdown">
-                  <button onclick="toggleDropdown(this, event)" class="dropdown-btn">
-                    <i class="ph ph-dots-three-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <a href="edit_insta_img.html?id=Travel Adventures" class="hover:bg-gray-700">
-                      <i class="ph ph-pencil-simple"></i> Edit
-                    </a>
-                    <a href="javascript:void(0)" onclick="confirmDelete('Travel Adventures')" class="hover:bg-red-700">
-                      <i class="ph ph-trash"></i> Delete
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="aspect-square overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=400&q=80" alt="Instagram Photo" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                <div class="flex items-center justify-between">
-                  <div class="text-white font-medium truncate">Travel Adventures</div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Photo Item 3 -->
-            <div class="bg-gray-800 rounded-xl overflow-hidden group relative gallery-item" data-category="food">
-              <!-- Action Menu -->
-              <div class="action-menu">
-                <div class="dropdown">
-                  <button onclick="toggleDropdown(this, event)" class="dropdown-btn">
-                    <i class="ph ph-dots-three-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <a href="edit_insta_img.html?id=Delicious Food" class="hover:bg-gray-700">
-                      <i class="ph ph-pencil-simple"></i> Edit
-                    </a>
-                    <a href="javascript:void(0)" onclick="confirmDelete('Delicious Food')" class="hover:bg-red-700">
-                      <i class="ph ph-trash"></i> Delete
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="aspect-square overflow-hidden">
-                <img src="https://source.unsplash.com/random/600x600?food" alt="Instagram Photo" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                <div class="flex items-center justify-between">
-                  <div class="text-white font-medium truncate">Delicious Food</div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Photo Item 4 -->
-            <div class="bg-gray-800 rounded-xl overflow-hidden group relative gallery-item" data-category="nature">
-              <!-- Action Menu -->
-              <div class="action-menu">
-                <div class="dropdown">
-                  <button onclick="toggleDropdown(this, event)" class="dropdown-btn">
-                    <i class="ph ph-dots-three-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <a href="edit_insta_img.html?id=Nature Beauty" class="hover:bg-gray-700">
-                      <i class="ph ph-pencil-simple"></i> Edit
-                    </a>
-                    <a href="javascript:void(0)" onclick="confirmDelete('Nature Beauty')" class="hover:bg-red-700">
-                      <i class="ph ph-trash"></i> Delete
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="aspect-square overflow-hidden">
-                <img src="https://source.unsplash.com/random/600x600?nature" alt="Instagram Photo" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                <div class="flex items-center justify-between">
-                  <div class="text-white font-medium truncate">Nature Beauty</div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Photo Item 5 -->
-            <div class="bg-gray-800 rounded-xl overflow-hidden group relative gallery-item" data-category="fitness">
-              <!-- Action Menu -->
-              <div class="action-menu">
-                <div class="dropdown">
-                  <button onclick="toggleDropdown(this, event)" class="dropdown-btn">
-                    <i class="ph ph-dots-three-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <a href="edit_insta_img.html?id=Fitness Goals" class="hover:bg-gray-700">
-                      <i class="ph ph-pencil-simple"></i> Edit
-                    </a>
-                    <a href="javascript:void(0)" onclick="confirmDelete('Fitness Goals')" class="hover:bg-red-700">
-                      <i class="ph ph-trash"></i> Delete
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="aspect-square overflow-hidden">
-                <img src="https://source.unsplash.com/random/600x600?fitness" alt="Instagram Photo" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                <div class="flex items-center justify-between">
-                  <div class="text-white font-medium truncate">Fitness Goals</div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Photo Item 6 -->
-            <div class="bg-gray-800 rounded-xl overflow-hidden group relative gallery-item" data-category="pets">
-              <!-- Action Menu -->
-              <div class="action-menu">
-                <div class="dropdown">
-                  <button onclick="toggleDropdown(this, event)" class="dropdown-btn">
-                    <i class="ph ph-dots-three-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <a href="edit_insta_img.html?id=Pet Love" class="hover:bg-gray-700">
-                      <i class="ph ph-pencil-simple"></i> Edit
-                    </a>
-                    <a href="javascript:void(0)" onclick="confirmDelete('Pet Love')" class="hover:bg-red-700">
-                      <i class="ph ph-trash"></i> Delete
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="aspect-square overflow-hidden">
-                <img src="https://source.unsplash.com/random/600x600?pet" alt="Instagram Photo" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                <div class="flex items-center justify-between">
-                  <div class="text-white font-medium truncate">Pet Love</div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Photo Item 7 -->
-            <div class="bg-gray-800 rounded-xl overflow-hidden group relative gallery-item" data-category="fashion">
-              <!-- Action Menu -->
-              <div class="action-menu">
-                <div class="dropdown">
-                  <button onclick="toggleDropdown(this, event)" class="dropdown-btn">
-                    <i class="ph ph-dots-three-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <a href="edit_insta_img.html?id=Fashion Style" class="hover:bg-gray-700">
-                      <i class="ph ph-pencil-simple"></i> Edit
-                    </a>
-                    <a href="javascript:void(0)" onclick="confirmDelete('Fashion Style')" class="hover:bg-red-700">
-                      <i class="ph ph-trash"></i> Delete
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="aspect-square overflow-hidden">
-                <img src="https://source.unsplash.com/random/600x600?fashion" alt="Instagram Photo" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                <div class="flex items-center justify-between">
-                  <div class="text-white font-medium truncate">Fashion Style</div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Photo Item 8 -->
-            <div class="bg-gray-800 rounded-xl overflow-hidden group relative gallery-item" data-category="art">
-              <!-- Action Menu -->
-              <div class="action-menu">
-                <div class="dropdown">
-                  <button onclick="toggleDropdown(this, event)" class="dropdown-btn">
-                    <i class="ph ph-dots-three-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <a href="edit_insta_img.html?id=Art Inspiration" class="hover:bg-gray-700">
-                      <i class="ph ph-pencil-simple"></i> Edit
-                    </a>
-                    <a href="javascript:void(0)" onclick="confirmDelete('Art Inspiration')" class="hover:bg-red-700">
-                      <i class="ph ph-trash"></i> Delete
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="aspect-square overflow-hidden">
-                <img src="https://source.unsplash.com/random/600x600?art" alt="Instagram Photo" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                <div class="flex items-center justify-between">
-                  <div class="text-white font-medium truncate">Art Inspiration</div>
-                </div>
-              </div>
-            </div>
           </div>
           
           <!-- No Results Message -->

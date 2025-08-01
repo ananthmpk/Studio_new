@@ -24,7 +24,7 @@ include("includes.php");
           <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
             <div>
               <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-1">Gallery</h1>
-              <div class="text-gray-400 text-sm">24 photos</div>
+              <!-- <div class="text-gray-400 text-sm">24 photos</div> -->
             </div>
             <div class="flex items-center gap-2 md:gap-4 mt-2 md:mt-0">
               <a href="add_images.php" id="addNewButton" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow transition flex items-center gap-2">
@@ -40,16 +40,31 @@ include("includes.php");
               <i class="ph ph-magnifying-glass search-icon"></i>
               <input type="text" class="search-input" placeholder="Search images..." />
             </div>
-            
+            <div class="text-gray-400 text-sm">24 photos</div>
             <!-- Filter Buttons -->
-            <div class="filter-container">
+            <!-- <div class="filter-container">
               <button class="filter-btn active" data-filter="all">All</button>
               <button class="filter-btn" data-filter="people">People</button>
               <button class="filter-btn" data-filter="cars">Cars</button>
               <button class="filter-btn" data-filter="cities">Cities</button>
               <button class="filter-btn" data-filter="animals">Animals</button>
-            </div>
+            </div> -->
           </div>
+          <!-- Filter Buttons -->
+            <div class="filter-container mb-6">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <?php
+                $arr = getAllCategoryDetails();
+                foreach($arr as $ar){
+              ?>
+              <button class="filter-btn" data-filter="<?php echo $ar['cat_id']; ?>"><?php echo $ar['title']; ?></button>
+                  <?php
+                }
+                  ?>
+              <!-- <button class="filter-btn" data-filter="cars">Cars</button>
+              <button class="filter-btn" data-filter="cities">Cities</button>
+              <button class="filter-btn" data-filter="animals">Animals</button> -->
+            </div>
           
           <!-- Gallery Grid -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 gallery-grid">
@@ -58,7 +73,7 @@ include("includes.php");
 
             foreach($gallery as $gal){
             ?>
-            <div class="relative rounded-2xl overflow-hidden shadow-lg bg-gray-800 group gallery-item" data-category="nature">
+            <div class="relative rounded-2xl overflow-hidden shadow-lg bg-gray-800 group gallery-item" data-category="<?php echo $gal['cat_id'] ?>">
               <img src="assets/images/gallery/<?php echo $gal['file_path'] ?>" alt="gallery" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
               <div class="absolute top-3 left-3 bg-gray-900/80 text-white text-xs px-2 py-0.5 rounded-full">Photo • <?php echo $gal['created_at']; ?></div>

@@ -110,7 +110,56 @@ function deleteImage($gal_id){
     }
 }
 
+//insta
 
+function getAllInstaImages(){
+    $arr = [];
+    
+    $qry = "SELECT * FROM studio_insta_img ORDER BY id DESC";
+    $run = mysqli_query($GLOBALS['conn'],$qry);
+
+    while($row = mysqli_fetch_array($run)){
+        $arr[] = $row;
+    }
+
+    return $arr;
+}
+
+function getAllInstaImagesById($id){
+
+    $qry = "SELECT * FROM studio_insta_img WHERE id='$id'";
+    $run = mysqli_query($GLOBALS['conn'],$qry);
+    $num = mysqli_num_rows($run);
+
+    if($num > 0){
+        $row = mysqli_fetch_array($run);
+        
+        return $row;
+
+    }else{
+
+        return false;
+        
+    }
+
+}
+
+function deleteInstaImg($id){
+
+    $qry = "DELETE FROM studio_insta_img WHERE id='$id'";
+    $delete = mysqli_query($GLOBALS['conn'],$qry);
+
+    if($delete){
+
+        return true;
+
+    }else{
+
+        return false;
+
+    }
+
+}
 
 
 

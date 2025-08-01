@@ -1,3 +1,76 @@
+<?php
+
+include("includes.php");
+
+
+if(isset($_POST['submit'])){
+
+   $title = $_POST['title'];
+
+   $status = $_POST['status'];
+
+   $insta_img =  $_FILES['insta_img']['name'];
+       
+    $file_tmp = $_FILES['insta_img'] ['tmp_name'];
+        
+    $file_size = $_FILES['insta_img'] ['size'];
+
+    // Validate file extension
+        $ext = strtolower(pathinfo($insta_img, PATHINFO_EXTENSION));
+
+        $allowed_exts = ['jpg', 'jpeg', 'png'];
+
+        $max_size = 5 * 1024 * 1024; // 10MB
+
+        if (in_array($ext, $allowed_exts)) {
+
+            // Validate file size
+           if ($file_size > $max_size) {
+
+            echo "<script>window.alert('File too large: $insta_img');</script>";
+           
+           }else{
+
+             // Upload directory
+             $image = uniqid() . '_' . basename($insta_img);
+
+             $upload_path = 'assets/images/instagram/' . $image;
+
+             // Move file
+             move_uploaded_file($file_tmp, $upload_path);
+
+                // DB insert
+               $qry = "INSERT INTO studio_insta_img (title, status, file_path ) VALUES ('$title', '$status', '$image' ) ";
+               $run = mysqli_query($conn, $qry);
+
+               if ($run) {
+
+                  echo "<script>window.alert('Upload Successfully');</script>";
+
+                  echo "<script>window.location.assign('manage_insta_img.php');</script>";
+
+               }else{
+
+                echo "<script>window.alert('DB insert failed: " . mysqli_error($conn) . "');</script>";
+
+                echo "<script>window.location.assign('manage_insta_img.php');</script>";
+
+               }
+            
+
+           }
+
+
+        }else{
+
+            echo "<script>window.alert('Invalid file type: $insta_img');</script>";
+          
+        }
+   
+               
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-900">
 <head>
@@ -25,7 +98,7 @@
               <div class="text-gray-400 text-sm">Upload a new photo to your Instagram gallery</div>
             </div>
             <div>
-              <a href="manage_insta_img.html" class="text-gray-400 hover:text-white flex items-center gap-2">
+              <a href="manage_insta_img.php" class="text-gray-400 hover:text-white flex items-center gap-2">
                 <i class="ph ph-arrow-left"></i> Back to Gallery
               </a>
             </div>
@@ -33,7 +106,7 @@
           
           <!-- Add Photo Form -->
           <div class="bg-gray-950/50 backdrop-blur-sm rounded-2xl border border-gray-800 shadow-2xl p-6 md:p-8">
-            <form id="addPhotoForm" class="space-y-6">
+            <form id="addPhotoForm" method="post" enctype="multipart/form-data" class="space-y-6">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Left Column: Photo Upload -->
                 <div class="space-y-6">
@@ -51,7 +124,7 @@
                         <p class="text-xs text-gray-500 mb-4">Recommended size: Square format (1:1 ratio)</p>
                         <label class="cursor-pointer bg-gray-700 hover:bg-gray-600 text-gray-200 px-4 py-2 rounded-lg text-sm">
                           <span>Select Photo</span>
-                          <input type="file" id="photoUpload" name="photoUpload" accept="image/*" class="hidden" onchange="previewImage(this)" required>
+                          <input type="file" id="photoUpload" name="insta_img" accept="image/*" class="hidden" onchange="previewImage(this)" required>
                         </label>
                       </div>
                     </div>
@@ -59,27 +132,7 @@
                   </div>
                   
                   <!-- Photo Filters -->
-                  <div class="hidden" id="filterSection">
-                    <label class="block text-sm font-medium text-gray-300 mb-2">Photo Filter</label>
-                    <div class="grid grid-cols-4 gap-2">
-                      <button type="button" class="filter-btn p-1 rounded-lg border-2 border-transparent hover:border-blue-500 focus:border-blue-500" data-filter="normal">
-                        <img id="filter-normal" src="#" alt="Normal" class="w-full aspect-square object-cover rounded">
-                        <span class="text-xs text-center block mt-1 text-gray-400">Normal</span>
-                      </button>
-                      <button type="button" class="filter-btn p-1 rounded-lg border-2 border-transparent hover:border-blue-500" data-filter="clarendon">
-                        <img id="filter-clarendon" src="#" alt="Clarendon" class="w-full aspect-square object-cover rounded filter-clarendon">
-                        <span class="text-xs text-center block mt-1 text-gray-400">Clarendon</span>
-                      </button>
-                      <button type="button" class="filter-btn p-1 rounded-lg border-2 border-transparent hover:border-blue-500" data-filter="gingham">
-                        <img id="filter-gingham" src="#" alt="Gingham" class="w-full aspect-square object-cover rounded filter-gingham">
-                        <span class="text-xs text-center block mt-1 text-gray-400">Gingham</span>
-                      </button>
-                      <button type="button" class="filter-btn p-1 rounded-lg border-2 border-transparent hover:border-blue-500" data-filter="moon">
-                        <img id="filter-moon" src="#" alt="Moon" class="w-full aspect-square object-cover rounded filter-moon">
-                        <span class="text-xs text-center block mt-1 text-gray-400">Moon</span>
-                      </button>
-                    </div>
-                  </div>
+                  
                 </div>
                 
                 <!-- Right Column: Photo Details -->
@@ -91,26 +144,31 @@
                     <label for="title" class="block text-sm font-medium text-gray-300 mb-1">Title <span class="text-red-500">*</span></label>
                     <input type="text" id="title" name="title" class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Enter photo title..." required>
                   </div>
-                  
+
+
                   <!-- Status -->
-                  <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Status</label>
-                    <div class="flex items-center gap-3">
-                      <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="status" name="status" value="active" class="sr-only peer" checked>
-                        <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                        <span class="ml-3 text-sm font-medium text-gray-300">Active</span>
-                      </label>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-1">Toggle to enable or disable this photo</p>
+                <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Status</label>
+                <div class="flex gap-4">
+                  <div class="flex items-center">
+                    <input type="radio" id="statusActive" name="status" value="1" class="h-4 w-4 text-blue-600 bg-gray-700 border-gray-500 focus:ring-blue-500" checked>
+                    <label for="statusActive" class="ml-2 text-sm text-gray-300">Active</label>
                   </div>
+                  <div class="flex items-center">
+                    <input type="radio" id="statusInactive" name="status" value="0" class="h-4 w-4 text-blue-600 bg-gray-700 border-gray-500 focus:ring-blue-500">
+                    <label for="statusInactive" class="ml-2 text-sm text-gray-300">Inactive</label>
+                  </div>
+                </div>
+              </div>
+                  
+                
                 </div>
               </div>
               
               <!-- Form Actions -->
               <div class="flex items-center justify-end pt-4 border-t border-gray-800">
-                <button type="button" onclick="window.location.href='manage_insta_img.html'" class="text-gray-300 bg-gray-800 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3">Cancel</button>
-                <button type="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Upload Photo</button>
+                <button type="button" onclick="window.location.href='manage_insta_img.php'" class="text-gray-300 bg-gray-800 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3">Cancel</button>
+                <button type="submit" name="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Upload Photo</button>
               </div>
             </form>
           </div>
@@ -191,7 +249,7 @@
         // Here you would normally send the data to the server
         // For demo purposes, we'll just redirect back to the gallery
         alert('Photo uploaded successfully!');
-        window.location.href = 'manage_insta_img.html';
+        window.location.href = 'manage_insta_img.php';
       });
     </script>
     
