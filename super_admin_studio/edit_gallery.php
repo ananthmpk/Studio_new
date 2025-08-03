@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
 
    $newimg =  $_FILES['newimg']['name'];
 
-   $upload_success = true; // Flag to track upload success
+  //  $upload_success = true; // Flag to track upload success
 
   //  $image = $_POST['oldimg'];
 
@@ -49,7 +49,7 @@ if(isset($_POST['submit'])){
 
             echo "<script>window.alert('File too large: $newimg');</script>";
 
-            $upload_success = false;
+            // $upload_success = false;
            
            }else{
 
@@ -70,7 +70,7 @@ if(isset($_POST['submit'])){
 
             echo "<script>window.alert('Invalid file type: $newimg');</script>";
 
-            $upload_success = false;
+            // $upload_success = false;
 
           
         }

@@ -1,3 +1,7 @@
+<?php
+include("includes.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-900">
 <head>
@@ -26,7 +30,7 @@
               <div class="text-gray-400 text-sm">Manage your website banners</div>
             </div>
             <div class="flex items-center gap-2 md:gap-4 mt-2 md:mt-0">
-              <a href="add_banner.html" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow transition flex items-center gap-2">
+              <a href="add_banner.php" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow transition flex items-center gap-2">
                 <i class="ph ph-plus"></i> Add Banner
               </a>
             </div>
@@ -53,118 +57,51 @@
                 </tr>
               </thead>
               <tbody>
+                <?php
+                  $banner = getAllBannerDetails();
+
+                  foreach($banner as $ban){
+                      $ban_id = $ban['ban_id'];
+                      $title = $ban['title'];
+                      $descrip = $ban['description'];
+                      $file = $ban['file_path'];
+                      $status = $ban['status'];
+                      $date = $ban['created_at'];
+                ?>
                 <tr>
                   <td>
                     <div class="flex items-center gap-3">
                       <div class="banner-thumbnail">
-                        <img src="https://via.placeholder.com/300x150?text=Banner+1" alt="Banner" class="w-full h-full object-cover">
+                        <img src="assets/images/banner/<?php echo $file ?>" alt="Banner" class="w-full h-full object-cover">
                       </div>
-                      <div class="font-medium text-white">Welcome Banner</div>
+                      <div class="font-medium text-white"><?php echo $title ?></div>
                     </div>
                   </td>
                   <td class="hidden md:table-cell">
-                    <div class="line-clamp-2 text-sm">Welcome to our website! Check out our latest products and services.</div>
+                    <div class="line-clamp-2 text-sm"><?php echo $descrip; ?></div>
                   </td>
                   <td class="hidden md:table-cell">
                     <label class="toggle-switch">
-                      <input type="checkbox" checked>
+                      <input type="checkbox" 
+                             data-banner-id="<?php echo $ban_id; ?>" 
+                             class="status-toggle"
+                             <?php echo ($status == 1) ? 'checked' : ''; ?>>
                       <span class="toggle-slider"></span>
                     </label>
                   </td>
-                  <td class="hidden lg:table-cell">Jan 15, 2024</td>
+                  <td class="hidden lg:table-cell"><?php echo $date ?></td>
                   <td class="text-right">
-                    <a href="edit_banner.html" class="text-gray-400 hover:text-white p-2">
+                    <a href="edit_banner.php?id=<?php echo $ban_id; ?>" class="text-gray-400 hover:text-white p-2">
                       <i class="ph ph-pencil-simple"></i>
                     </a>
-                    <a href="delete_banner.html" class="text-gray-400 hover:text-red-400 p-2">
+                    <a href="delete_banner.php?id=<?php echo $ban_id; ?>" class="text-gray-400 hover:text-red-400 p-2">
                       <i class="ph ph-trash"></i>
                     </a>
                   </td>
                 </tr>
-                <tr>
-                  <td>
-                    <div class="flex items-center gap-3">
-                      <div class="banner-thumbnail">
-                        <img src="https://via.placeholder.com/300x150?text=Banner+2" alt="Banner" class="w-full h-full object-cover">
-                      </div>
-                      <div class="font-medium text-white">Special Offer</div>
-                    </div>
-                  </td>
-                  <td class="hidden md:table-cell">
-                    <div class="line-clamp-2 text-sm">Limited time offer! Get 20% off on all products this week.</div>
-                  </td>
-                  <td class="hidden md:table-cell">
-                    <label class="toggle-switch">
-                      <input type="checkbox" checked>
-                      <span class="toggle-slider"></span>
-                    </label>
-                  </td>
-                  <td class="hidden lg:table-cell">Feb 3, 2024</td>
-                  <td class="text-right">
-                    <a href="edit_banner.html" class="text-gray-400 hover:text-white p-2">
-                      <i class="ph ph-pencil-simple"></i>
-                    </a>
-                    <a href="delete_banner.html" class="text-gray-400 hover:text-red-400 p-2">
-                      <i class="ph ph-trash"></i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="flex items-center gap-3">
-                      <div class="banner-thumbnail">
-                        <img src="https://via.placeholder.com/300x150?text=Banner+3" alt="Banner" class="w-full h-full object-cover">
-                      </div>
-                      <div class="font-medium text-white">New Collection</div>
-                    </div>
-                  </td>
-                  <td class="hidden md:table-cell">
-                    <div class="line-clamp-2 text-sm">Discover our new summer collection. Fresh designs for the season.</div>
-                  </td>
-                  <td class="hidden md:table-cell">
-                    <label class="toggle-switch">
-                      <input type="checkbox">
-                      <span class="toggle-slider"></span>
-                    </label>
-                  </td>
-                  <td class="hidden lg:table-cell">Mar 10, 2024</td>
-                  <td class="text-right">
-                    <a href="edit_banner.html" class="text-gray-400 hover:text-white p-2">
-                      <i class="ph ph-pencil-simple"></i>
-                    </a>
-                    <a href="delete_banner.html" class="text-gray-400 hover:text-red-400 p-2">
-                      <i class="ph ph-trash"></i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="flex items-center gap-3">
-                      <div class="banner-thumbnail">
-                        <img src="https://via.placeholder.com/300x150?text=Banner+4" alt="Banner" class="w-full h-full object-cover">
-                      </div>
-                      <div class="font-medium text-white">Holiday Sale</div>
-                    </div>
-                  </td>
-                  <td class="hidden md:table-cell">
-                    <div class="line-clamp-2 text-sm">Holiday season sale! Great discounts on all products.</div>
-                  </td>
-                  <td class="hidden md:table-cell">
-                    <label class="toggle-switch">
-                      <input type="checkbox" checked>
-                      <span class="toggle-slider"></span>
-                    </label>
-                  </td>
-                  <td class="hidden lg:table-cell">Apr 5, 2024</td>
-                  <td class="text-right">
-                    <a href="edit_banner.html" class="text-gray-400 hover:text-white p-2">
-                      <i class="ph ph-pencil-simple"></i>
-                    </a>
-                    <a href="delete_banner.html" class="text-gray-400 hover:text-red-400 p-2">
-                      <i class="ph ph-trash"></i>
-                    </a>
-                  </td>
-                </tr>
+                <?php
+                  }
+                ?>
               </tbody>
             </table>
           </div>
@@ -185,5 +122,83 @@
 
     <script src="assets/js/common.js"></script>
     <script src="assets/js/banner.js"></script>
+    
+    <!-- Toggle Status Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded, initializing toggles...');
+        
+        // All toggle switches select pannalam
+        const toggles = document.querySelectorAll('.status-toggle');
+        console.log('Found toggles:', toggles.length);
+        
+        toggles.forEach(toggle => {
+            console.log('Adding listener to toggle:', toggle);
+            
+            toggle.addEventListener('change', function(e) {
+                console.log('Toggle clicked!');
+                
+                const bannerId = this.getAttribute('data-banner-id');
+                // Explicitly convert pannalam
+                const newStatus = this.checked ? 1 : 0;
+                
+                console.log('Banner ID:', bannerId, 'New Status:', newStatus, 'Checked:', this.checked);
+                
+                // Loading state show pannalam
+                this.disabled = true;
+                
+                // Form data properly format pannalam
+                const formData = new FormData();
+                formData.append('banner_id', bannerId);
+                formData.append('status', newStatus);
+                
+                // AJAX call panni status update pannalam
+                fetch('update_banner_status.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    console.log('Response received:', response);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Response data:', data);
+                    
+                    this.disabled = false; // Enable back pannalam
+                    
+                    if (data.success) {
+                        console.log('Status updated successfully');
+                        // Optional: Success notification
+                        showNotification('Status updated successfully!', 'success');
+                    } else {
+                        console.error('Failed to update status:', data.message);
+                        // Toggle-ah original position-ku return pannalam if error
+                        this.checked = !this.checked;
+                        showNotification('Failed to update status: ' + data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('AJAX Error:', error);
+                    this.disabled = false; // Enable back pannalam
+                    // Toggle-ah original position-ku return pannalam if error
+                    this.checked = !this.checked;
+                    showNotification('Connection error occurred', 'error');
+                });
+            });
+        });
+        
+        // Simple notification function
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 ${type === 'success' ? 'bg-green-600' : 'bg-red-600'}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    });
+    </script>
 </body>
-</html> 
+</html>

@@ -162,11 +162,61 @@ function deleteInstaImg($id){
 }
 
 
+//Get all banner details
+
+function getAllBannerDetails(){
+    
+    $arr = [];
+
+    $qry = "SELECT * FROM studio_banner ORDER BY ban_id DESC";
+    $run = mysqli_query($GLOBALS['conn'],$qry);
+
+    while($row = mysqli_fetch_array($run)){
+        $arr[] = $row;
+    }
+
+    return $arr;
+}
 
 
+// Get banner details by id
+
+function getBannerDetailsByid($ban_id){
+
+    $qry = "SELECT * FROM studio_banner WHERE ban_id='$ban_id'";
+    $run = mysqli_query($GLOBALS['conn'],$qry);
+    $num = mysqli_num_rows($run);
+
+    if($num > 0){
+        $row = mysqli_fetch_array($run);
+        
+        return $row;
+
+    }else{
+
+        return false;
+        
+    }
+}
 
 
+// delete image details by id
 
+function deleteBanner($ban_id){
+
+    $qry = "DELETE FROM studio_gallery WHERE ban_id='$ban_id'";
+    $delete = mysqli_query($GLOBALS['conn'],$qry);
+
+    if($delete){
+
+        return true;
+
+    }else{
+
+        return false;
+
+    }
+}
 
 
 
