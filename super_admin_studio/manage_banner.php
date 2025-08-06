@@ -51,7 +51,7 @@ include("includes.php");
                 <tr>
                   <th>Banner</th>
                   <th class="hidden md:table-cell">Description</th>
-                  <th class="hidden md:table-cell">Status</th>
+                  <!-- <th class="hidden md:table-cell">Status</th> -->
                   <th class="hidden lg:table-cell">Created Date</th>
                   <th class="w-24 text-right">Actions</th>
                 </tr>
@@ -80,15 +80,19 @@ include("includes.php");
                   <td class="hidden md:table-cell">
                     <div class="line-clamp-2 text-sm"><?php echo $descrip; ?></div>
                   </td>
-                  <td class="hidden md:table-cell">
+                  <!-- <td class="hidden md:table-cell">
                     <label class="toggle-switch">
                       <input type="checkbox" 
-                             data-banner-id="<?php echo $ban_id; ?>" 
+                             data-banner-id="<?php 
+                            //  echo $ban_id;
+                              ?>" 
                              class="status-toggle"
-                             <?php echo ($status == 1) ? 'checked' : ''; ?>>
+                             <?php 
+                            //  echo ($status == 1) ? 'checked' : '';
+                              ?>>
                       <span class="toggle-slider"></span>
                     </label>
-                  </td>
+                  </td> -->
                   <td class="hidden lg:table-cell"><?php echo $date ?></td>
                   <td class="text-right">
                     <a href="edit_banner.php?id=<?php echo $ban_id; ?>" class="text-gray-400 hover:text-white p-2">

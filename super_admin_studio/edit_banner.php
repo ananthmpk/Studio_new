@@ -1,3 +1,106 @@
+<?php
+ include('includes.php');
+
+ $id = $_GET['id'];
+
+$banner = getBannerDetailsByid($id);
+
+$title = $banner['title'];
+
+$descrip = $banner['description'];
+
+$file_path = $banner['file_path'];
+
+$status = $banner['status'];
+
+
+if(isset($_POST['submit'])){
+
+   $title = $_POST['title'];
+
+   $descrip = $_POST['description'];
+
+   $status = $_POST['status'];
+
+   $newimg =  $_FILES['newimg']['name'];
+
+  //  $upload_success = true; // Flag to track upload success
+
+  //  $image = $_POST['oldimg'];
+
+
+   if($newimg != ''){
+       
+    $file_tmp = $_FILES['newimg'] ['tmp_name'];
+        
+    $file_size = $_FILES['newimg'] ['size'];
+
+    // Validate file extension
+        $ext = strtolower(pathinfo($newimg, PATHINFO_EXTENSION));
+
+        $allowed_exts = ['jpg', 'jpeg', 'png'];
+
+        $max_size = 10 * 1024 * 1024; // 10MB
+
+        if (in_array($ext, $allowed_exts)) {
+
+            // Validate file size
+           if ($file_size > $max_size) {
+
+            echo "<script>window.alert('File too large: $newimg');</script>";
+
+            // $upload_success = false;
+           
+           }else{
+
+             // Upload directory
+             $image = uniqid() . '_' . basename($newimg);
+
+             $upload_path = 'assets/images/banner/' . $image;
+
+             // Move file
+            move_uploaded_file($file_tmp, $upload_path);
+
+            
+
+           }
+
+
+        }else{
+
+            echo "<script>window.alert('Invalid file type: $newimg');</script>";
+
+            // $upload_success = false;
+
+          
+        }
+   }else{
+
+            $image =  $_POST['oldimg'];
+            
+   }
+
+               // DB insert
+               $qry = "UPDATE studio_banner SET title = '$title', description = '$descrip', file_path = '$image', status='$status' WHERE ban_id = '$id'";
+               $run = mysqli_query($conn, $qry);
+
+               if ($run) {
+
+                  echo "<script>window.alert('Update Successfully');</script>";
+
+                  echo "<script>window.location.assign('manage_banner.php');</script>";
+
+               }else{
+
+                echo "<script>window.alert('DB insert failed: " . mysqli_error($conn) . "');</script>";
+
+                echo "<script>window.location.assign('manage_banner.php');</script>";
+
+               }
+              }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-900">
 <head>
@@ -25,7 +128,7 @@
               <div class="text-gray-400 text-sm">Update banner information</div>
             </div>
             <div>
-              <a href="manage_banner.html" class="text-gray-400 hover:text-white flex items-center gap-2">
+              <a href="manage_banner.php" class="text-gray-400 hover:text-white flex items-center gap-2">
                 <i class="ph ph-arrow-left"></i> Back to Banners
               </a>
             </div>
@@ -33,7 +136,7 @@
           
           <!-- Edit Banner Form -->
           <div class="bg-gray-950/50 backdrop-blur-sm rounded-2xl border border-gray-800 shadow-2xl p-6 md:p-8">
-            <form id="editBannerForm" class="space-y-6">
+            <form id="editBannerForm" class="space-y-6" method="post" enctype="multipart/form-data">
               <!-- Banner Information -->
               <div class="space-y-4">
                 <h2 class="text-xl font-semibold text-white border-b border-gray-800 pb-2">Banner Information</h2>
@@ -42,13 +145,13 @@
                   <!-- Title -->
                   <div class="md:col-span-2">
                     <label for="title" class="block text-sm font-medium text-gray-300 mb-1">Banner Title <span class="text-red-500">*</span></label>
-                    <input type="text" id="title" name="title" value="Welcome Banner" class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="e.g., Welcome Banner" required>
+                    <input type="text" id="title" name="title" value="<?php echo $title ?>" class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="e.g., Welcome Banner" required>
                   </div>
                   
                   <!-- Description -->
                   <div class="md:col-span-2">
                     <label for="description" class="block text-sm font-medium text-gray-300 mb-1">Description <span class="text-red-500">*</span></label>
-                    <textarea id="description" name="description" rows="3" class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Enter banner description..." required>Welcome to our website! Check out our latest products and services.</textarea>
+                    <textarea id="description" name="description" rows="3" class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Enter banner description..." required><?php echo $descrip ?></textarea>
                   </div>
                   
                   <!-- Banner Image -->
@@ -56,29 +159,26 @@
                     <label class="block text-sm font-medium text-gray-300 mb-3">Banner Image</label>
                     <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-700 rounded-lg p-6 bg-gray-800/50">
                       <div id="previewContainer" class="mb-4 w-full max-w-md">
-                        <img id="imagePreview" src="https://via.placeholder.com/1200x400?text=Welcome+Banner" alt="Banner Preview" class="w-full h-auto rounded-lg">
+                        <img id="imagePreview" src="assets/images/gallery/<?php echo $file_path ?>" alt="Banner Preview" class="w-full h-auto rounded-lg">
                       </div>
                       <div class="flex flex-col items-center text-center">
                         <p class="text-sm text-gray-400 mb-2">Drag and drop to replace image, or click to browse</p>
                         <p class="text-xs text-gray-500 mb-3">Recommended size: 1200 x 400 pixels (JPG, PNG, WebP)</p>
                         <label class="cursor-pointer bg-gray-700 hover:bg-gray-600 text-gray-200 px-4 py-2 rounded-lg text-sm">
                           <span>Change Image</span>
-                          <input type="file" id="bannerImage" name="bannerImage" accept="image/*" class="hidden" onchange="previewImage(this)">
+                          <input type="file" id="bannerImage" name="newimg" accept="image/*" class="hidden" onchange="previewImage(this)">
                         </label>
                       </div>
                     </div>
                   </div>
                   
-                  <!-- Link URL -->
-                  <!-- <div class="md:col-span-2">
-                    <label for="linkUrl" class="block text-sm font-medium text-gray-300 mb-1">Link URL</label>
-                    <input type="url" id="linkUrl" name="linkUrl" value="https://example.com/welcome" class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="https://example.com/page">
-                    <p class="text-xs text-gray-500 mt-1">Where users will go when they click on the banner</p>
-                  </div> -->
+                   <input name='oldimg' type="hidden" value="<?php echo $file_path ?>">
+
+       
                   
                   <!-- Status -->
                   <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Status</label>
+                    <!-- <label class="block text-sm font-medium text-gray-300 mb-1">Status</label>
                     <div class="flex items-center gap-3">
                       <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" id="status" name="status" value="active" class="sr-only peer" checked>
@@ -86,7 +186,21 @@
                         <span class="ml-3 text-sm font-medium text-gray-300">Active</span>
                       </label>
                     </div>
-                    <p class="text-xs text-gray-500 mt-1">Toggle to enable or disable this banner</p>
+                    <p class="text-xs text-gray-500 mt-1">Toggle to enable or disable this banner</p> -->
+
+                     <div>
+                    <label for="category-status" class="block text-sm font-medium text-gray-300 mb-2">Status</label>
+                    <div class="flex items-center gap-4 mt-3">
+                      <label class="inline-flex items-center">
+                        <input type="radio" name="status" value="1" class="text-blue-600 focus:ring-blue-500" <?php if($status == 1) echo "checked" ?>>
+                        <span class="ml-2 text-gray-300">Active</span>
+                      </label>
+                      <label class="inline-flex items-center">
+                        <input type="radio" name="status" value="0" class="text-gray-600 focus:ring-gray-500" <?php if($status == 0) echo "checked" ?>>
+                        <span class="ml-2 text-gray-300">Inactive</span>
+                      </label>
+                    </div>
+                  </div>
                   </div>
                   
                   <!-- Display Order -->
@@ -100,8 +214,8 @@
               
               <!-- Form Actions -->
               <div class="flex items-center justify-end pt-4 border-t border-gray-800">
-                <button type="button" onclick="window.location.href='manage_banner.html'" class="text-gray-300 bg-gray-800 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3">Cancel</button>
-                <button type="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update Banner</button>
+                <button type="button" onclick="window.location.href='manage_banner.php'" class="text-gray-300 bg-gray-800 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3">Cancel</button>
+                <button type="submit" name="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update Banner</button>
               </div>
             </form>
           </div>
@@ -149,7 +263,7 @@
         // Here you would normally send the data to the server
         // For demo purposes, we'll just redirect back to the banner list
         alert('Banner updated successfully!');
-        window.location.href = 'manage_banner.html';
+        window.location.href = 'manage_banner.php';
       });
     </script>
 </body>

@@ -204,7 +204,7 @@ function getBannerDetailsByid($ban_id){
 
 function deleteBanner($ban_id){
 
-    $qry = "DELETE FROM studio_gallery WHERE ban_id='$ban_id'";
+    $qry = "DELETE FROM studio_banner WHERE ban_id='$ban_id'";
     $delete = mysqli_query($GLOBALS['conn'],$qry);
 
     if($delete){
