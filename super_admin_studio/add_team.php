@@ -1,3 +1,82 @@
+<?php
+
+  include("includes.php");
+
+  
+if (isset($_POST['submit'])) {
+
+  $name = $_POST['name'];
+  
+  $role = $_POST['role'];
+
+  $email = $_POST['email'];
+
+  $status = $_POST['status'];
+
+  $facebook = $_POST['facebook'];
+
+  $instagram = $_POST['instagram'];
+
+  $whatsapp = $_POST['whatsapp'];
+
+  $linkedin = $_POST['linkedin'];
+
+  $file = $_FILES['profile']['name'];
+
+  $file_tmp = $_FILES['profile']['tmp_name'];
+
+  $file_size = $_FILES['profile']['size'];
+
+  $allowed_exts = ['jpg', 'jpeg', 'png'];
+
+  $max_size = 10 * 1024 * 1024; // 10MB
+
+  // Validate file extension
+  $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+
+  if (in_array($ext, $allowed_exts)) {
+
+    if ($file_size > $max_size) {
+
+      echo "<script>window.alert('File too large: $file');</script>";
+    } else {
+
+      // Upload directory
+      $image = uniqid() . '_' . basename($file);
+
+      $upload_path = 'assets/images/team/' . $image;
+
+      if (move_uploaded_file($file_tmp, $upload_path)) {
+        // DB insert
+        $qry = "INSERT INTO studio_team (mname, email, role, status, facebook, instagram, whatsapp, linkedin, profile) VALUES ('$name', '$email', '$role', '$status', '$facebook', '$instagram', '$whatsapp', '$linkedin', '$image')";
+        $run = mysqli_query($conn, $qry);
+
+        if ($run) {
+
+          echo "<script>window.alert('Upload completed!');</script>";
+
+          echo "<script>window.location.assign('manage_team.php');</script>";
+
+        } else {
+
+          echo "<script>window.alert('DB insert failed: " . mysqli_error($conn) . "');</script>";
+
+        }
+      } else {
+
+        echo "<script>window.alert('Failed to upload: $file');</script>";
+      }
+    }
+    
+  } else {
+
+    echo "<script>window.alert('Invalid file type: $file');</script>";
+
+  }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-900">
 <head>
@@ -25,7 +104,7 @@
               <div class="text-gray-400 text-sm">Create a new team member profile</div>
             </div>
             <div>
-              <a href="manage_team.html" class="text-gray-400 hover:text-white flex items-center gap-2">
+              <a href="manage_team.php" class="text-gray-400 hover:text-white flex items-center gap-2">
                 <i class="ph ph-arrow-left"></i> Back to Team
               </a>
             </div>
@@ -33,7 +112,7 @@
           
           <!-- Add Team Member Form -->
           <div class="bg-gray-950/50 backdrop-blur-sm rounded-2xl border border-gray-800 shadow-2xl p-6 md:p-8">
-            <form id="addTeamForm" class="space-y-6">
+            <form id="addTeamForm" class="space-y-6" method="post" enctype="multipart/form-data">
               <!-- Personal Information Section -->
               <div class="space-y-4">
                 <h2 class="text-xl font-semibold text-white border-b border-gray-800 pb-2">Personal Information</h2>
@@ -46,7 +125,7 @@
                     </div>
                     <label class="cursor-pointer bg-gray-800 hover:bg-gray-700 text-gray-300 px-4 py-2 rounded-lg text-sm">
                       <span>Upload Photo</span>
-                      <input type="file" id="profileImage" accept="image/*" class="hidden" onchange="previewImage(this)">
+                      <input type="file" id="profileImage" name="profile" accept="image/*" class="hidden" onchange="previewImage(this)">
                     </label>
                   </div>
                   
@@ -73,11 +152,11 @@
                     <label class="block text-sm font-medium text-gray-300 mb-1">Status</label>
                     <div class="flex items-center gap-4">
                       <label class="inline-flex items-center">
-                        <input type="radio" name="status" value="active" class="text-blue-600 focus:ring-blue-500" checked>
+                        <input type="radio" name="status" value="1" class="text-blue-600 focus:ring-blue-500" checked>
                         <span class="ml-2 text-gray-300">Active</span>
                       </label>
                       <label class="inline-flex items-center">
-                        <input type="radio" name="status" value="inactive" class="text-gray-600 focus:ring-gray-500">
+                        <input type="radio" name="status" value="0" class="text-gray-600 focus:ring-gray-500">
                         <span class="ml-2 text-gray-300">Inactive</span>
                       </label>
                     </div>
@@ -125,19 +204,19 @@
               </div>
               
               <!-- Additional Information Section -->
-              <div class="space-y-4">
+              <!-- <div class="space-y-4">
                 <h2 class="text-xl font-semibold text-white border-b border-gray-800 pb-2">Additional Information</h2>
                 
                 <div>
                   <label for="bio" class="block text-sm font-medium text-gray-300 mb-1">Bio</label>
                   <textarea id="bio" name="bio" rows="4" class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Write a short bio..."></textarea>
                 </div>
-              </div>
+              </div> -->
               
               <!-- Form Actions -->
               <div class="flex items-center justify-end pt-4 border-t border-gray-800">
-                <button type="button" onclick="window.location.href='manage_team.html'" class="text-gray-300 bg-gray-800 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3">Cancel</button>
-                <button type="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Team Member</button>
+                <button type="button" onclick="window.location.href='manage_team.php'" class="text-gray-300 bg-gray-800 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3">Cancel</button>
+                <button type="submit" name="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Team Member</button>
               </div>
             </form>
           </div>
@@ -161,24 +240,24 @@
       }
       
       // Form submission
-      document.getElementById('addTeamForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+      // document.getElementById('addTeamForm').addEventListener('submit', function(e) {
+      //   e.preventDefault();
         
-        // Validate form
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const role = document.getElementById('role').value;
+      //   // Validate form
+      //   const name = document.getElementById('name').value;
+      //   const email = document.getElementById('email').value;
+      //   const role = document.getElementById('role').value;
         
-        if (!name || !email || !role) {
-          alert('Please fill in all required fields.');
-          return;
-        }
+      //   if (!name || !email || !role) {
+      //     alert('Please fill in all required fields.');
+      //     return;
+      //   }
         
-        // Here you would normally send the data to the server
-        // For demo purposes, we'll just redirect back to the team list
-        alert('Team member added successfully!');
-        window.location.href = 'manage_team.html';
-      });
+      //   // Here you would normally send the data to the server
+      //   // For demo purposes, we'll just redirect back to the team list
+      //   alert('Team member added successfully!');
+      //   window.location.href = 'manage_team.php';
+      // });
     </script>
 </body>
 </html>

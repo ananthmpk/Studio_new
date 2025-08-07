@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
         }
       } else {
 
-        echo "<script>window.alert('Failed to upload: $file_name');</script>";
+        echo "<script>window.alert('Failed to upload: $file');</script>";
       }
     }
     

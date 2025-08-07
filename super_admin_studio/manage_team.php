@@ -1,3 +1,9 @@
+<?php
+
+  include("includes.php");
+  
+
+?>
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-900">
 <head>
@@ -25,7 +31,7 @@
               <div class="text-gray-400 text-sm">Manage your team members</div>
             </div>
             <div class="flex items-center gap-2 md:gap-4 mt-2 md:mt-0">
-              <a href="add_team.html" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow transition flex items-center gap-2">
+              <a href="add_team.php" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow transition flex items-center gap-2">
                 <i class="ph ph-plus"></i> Add Team Member
               </a>
             </div>
@@ -52,166 +58,101 @@
                 </tr>
               </thead>
               <tbody>
+                 <?php
+                  $team = getAllTeamDetails();
+
+                  foreach($team as $te){
+                      $team_id = $te['team_id'];
+                      $name = $te['mname'];
+                      $role = $te['role'];
+                      $email = $te['email'];
+                      $status = $te['status'];
+                      $face = $te['facebook'];
+                      $insta = $te['instagram'];
+                      $whats = $te['whatsapp'];
+                      $link = $te['linkedin'];
+                      $photo = $te['profile'];
+                      $date = $te['created_at'];
+                ?>
+
                 <tr>
                   <td>
                     <div class="flex items-center gap-3">
                       <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center overflow-hidden">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Team Member" class="w-full h-full object-cover">
+                        <img src="assets/images/team/<?php echo $photo ?>" alt="Team Member" class="w-full h-full object-cover">
                       </div>
                       <div>
-                        <div class="font-medium text-white">John Smith</div>
-                        <div class="text-sm text-gray-400">john@example.com</div>
+                        <div class="font-medium text-white"><?php echo $name ?></div>
+                        <div class="text-sm text-gray-400"><?php echo $email ?></div>
                       </div>
                     </div>
                   </td>
-                  <td class="hidden md:table-cell">CEO & Founder</td>
+                  <td class="hidden md:table-cell"><?php echo $role ?></td>
+
                   <td class="hidden md:table-cell">
                     <div class="flex space-x-2">
+                      <?php
+                      if($face != ''){
+                        ?>
                       <a href="#" class="text-blue-400 hover:text-blue-300"><i class="ph ph-facebook-logo"></i></a>
+                        <?php
+                      }
+                        ?>
+                      <?php
+                      if($insta != ''){
+                        ?>
                       <a href="#" class="text-pink-400 hover:text-pink-300"><i class="ph ph-instagram-logo"></i></a>
+                        <?php
+                      }
+                        ?>
+                      <?php
+                      if($whats != ''){
+                        ?>
                       <a href="#" class="text-green-400 hover:text-green-300"><i class="ph ph-whatsapp-logo"></i></a>
+                        <?php
+                      }
+                        ?>
+                      <?php
+                      if($link != ''){
+                        ?>
                       <a href="#" class="text-blue-500 hover:text-blue-400"><i class="ph ph-linkedin-logo"></i></a>
+                        <?php
+                      }
+                        ?>
                     </div>
                   </td>
-                  <td class="hidden lg:table-cell">
+
+                    <?php
+                    if($status == 1){
+                    ?>
+                   <td class="hidden lg:table-cell">
                     <span class="status-badge active">Active</span>
                   </td>
-                  <td class="text-right">
-                    <a href="edit_team.html" class="text-gray-400 hover:text-white p-2" >
-                      <i class="ph ph-pencil-simple"></i>
-                    </a>
-                    <a href="delete_team.html" class="text-gray-400 hover:text-red-400 p-2">
-                      <i class="ph ph-trash"></i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="flex items-center gap-3">
-                      <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-400 flex items-center justify-center overflow-hidden">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Team Member" class="w-full h-full object-cover">
-                      </div>
-                      <div>
-                        <div class="font-medium text-white">Sarah Johnson</div>
-                        <div class="text-sm text-gray-400">sarah@example.com</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="hidden md:table-cell">Marketing Director</td>
-                  <td class="hidden md:table-cell">
-                    <div class="flex space-x-2">
-                      <a href="#" class="text-blue-400 hover:text-blue-300"><i class="ph ph-facebook-logo"></i></a>
-                      <a href="#" class="text-pink-400 hover:text-pink-300"><i class="ph ph-instagram-logo"></i></a>
-                      <a href="#" class="text-blue-500 hover:text-blue-400"><i class="ph ph-linkedin-logo"></i></a>
-                    </div>
-                  </td>
-                  <td class="hidden lg:table-cell">
-                    <span class="status-badge active">Active</span>
-                  </td>
-                  <td class="text-right">
-                    <a href="edit_team.html" class="text-gray-400 hover:text-white p-2">
-                      <i class="ph ph-pencil-simple"></i>
-                    </a>
-                    <a href="delete_team.html" class="text-gray-400 hover:text-red-400 p-2">
-                      <i class="ph ph-trash"></i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="flex items-center gap-3">
-                      <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-400 flex items-center justify-center overflow-hidden">
-                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Team Member" class="w-full h-full object-cover">
-                      </div>
-                      <div>
-                        <div class="font-medium text-white">Michael Brown</div>
-                        <div class="text-sm text-gray-400">michael@example.com</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="hidden md:table-cell">Lead Developer</td>
-                  <td class="hidden md:table-cell">
-                    <div class="flex space-x-2">
-                      <a href="#" class="text-pink-400 hover:text-pink-300"><i class="ph ph-instagram-logo"></i></a>
-                      <a href="#" class="text-green-400 hover:text-green-300"><i class="ph ph-whatsapp-logo"></i></a>
-                      <a href="#" class="text-blue-500 hover:text-blue-400"><i class="ph ph-linkedin-logo"></i></a>
-                    </div>
-                  </td>
-                  <td class="hidden lg:table-cell">
-                    <span class="status-badge active">Active</span>
-                  </td>
-                  <td class="text-right">
-                    <a href="edit_team.html" class="text-gray-400 hover:text-white p-2">
-                      <i class="ph ph-pencil-simple"></i>
-                    </a>
-                    <a href="delete_team.html" class="text-gray-400 hover:text-red-400 p-2">
-                      <i class="ph ph-trash"></i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="flex items-center gap-3">
-                      <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-green-400 flex items-center justify-center overflow-hidden">
-                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Team Member" class="w-full h-full object-cover">
-                      </div>
-                      <div>
-                        <div class="font-medium text-white">Emily Davis</div>
-                        <div class="text-sm text-gray-400">emily@example.com</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="hidden md:table-cell">UX Designer</td>
-                  <td class="hidden md:table-cell">
-                    <div class="flex space-x-2">
-                      <a href="#" class="text-blue-400 hover:text-blue-300"><i class="ph ph-facebook-logo"></i></a>
-                      <a href="#" class="text-pink-400 hover:text-pink-300"><i class="ph ph-instagram-logo"></i></a>
-                    </div>
-                  </td>
-                  <td class="hidden lg:table-cell">
+                    <?php
+                    }else if($status == 0){
+                    ?>
+                    <td class="hidden lg:table-cell">
                     <span class="status-badge inactive">Inactive</span>
-                  </td>
+                  </td>                 
+                    <?php
+                    }
+                    ?>
+
                   <td class="text-right">
-                    <a href="edit_team.html" class="text-gray-400 hover:text-white p-2">
+                    <a href="edit_team.php?id=<?php echo $team_id ?>" class="text-gray-400 hover:text-white p-2" >
                       <i class="ph ph-pencil-simple"></i>
                     </a>
-                    <a href="delete_team.html" class="text-gray-400 hover:text-red-400 p-2">
+                    <a href="delete_team.php?id=<?php echo $team_id ?>" onclick="return confirm('Are you sure you want to delete this item? This action cannot be undone!')" class="text-gray-400 hover:text-red-400 p-2">
                       <i class="ph ph-trash"></i>
                     </a>
                   </td>
                 </tr>
-                <tr>
-                  <td>
-                    <div class="flex items-center gap-3">
-                      <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-400 flex items-center justify-center overflow-hidden">
-                        <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Team Member" class="w-full h-full object-cover">
-                      </div>
-                      <div>
-                        <div class="font-medium text-white">David Wilson</div>
-                        <div class="text-sm text-gray-400">david@example.com</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="hidden md:table-cell">Content Manager</td>
-                  <td class="hidden md:table-cell">
-                    <div class="flex space-x-2">
-                      <a href="#" class="text-blue-400 hover:text-blue-300"><i class="ph ph-facebook-logo"></i></a>
-                      <a href="#" class="text-green-400 hover:text-green-300"><i class="ph ph-whatsapp-logo"></i></a>
-                      <a href="#" class="text-blue-500 hover:text-blue-400"><i class="ph ph-linkedin-logo"></i></a>
-                    </div>
-                  </td>
-                  <td class="hidden lg:table-cell">
-                    <span class="status-badge active">Active</span>
-                  </td>
-                  <td class="text-right">
-                    <a href="edit_team.html" class="text-gray-400 hover:text-white p-2">
-                      <i class="ph ph-pencil-simple"></i>
-                    </a>
-                    <a href="delete_team.html" class="text-gray-400 hover:text-red-400 p-2">
-                      <i class="ph ph-trash"></i>
-                    </a>
-                  </td>
-                </tr>
+                <?php
+
+                  }  
+
+                  ?>
+  
               </tbody>
             </table>
           </div>

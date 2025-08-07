@@ -110,7 +110,7 @@ function deleteImage($gal_id){
     }
 }
 
-//insta
+//Get insta images 
 
 function getAllInstaImages(){
     $arr = [];
@@ -124,6 +124,8 @@ function getAllInstaImages(){
 
     return $arr;
 }
+
+// Get insta image by id
 
 function getAllInstaImagesById($id){
 
@@ -143,6 +145,8 @@ function getAllInstaImagesById($id){
     }
 
 }
+
+// delete insta image by id
 
 function deleteInstaImg($id){
 
@@ -199,12 +203,66 @@ function getBannerDetailsByid($ban_id){
     }
 }
 
-
 // delete image details by id
 
 function deleteBanner($ban_id){
 
     $qry = "DELETE FROM studio_banner WHERE ban_id='$ban_id'";
+    $delete = mysqli_query($GLOBALS['conn'],$qry);
+
+    if($delete){
+
+        return true;
+
+    }else{
+
+        return false;
+
+    }
+}
+
+//Get all team details
+
+function getAllTeamDetails(){
+    
+    $arr = [];
+
+    $qry = "SELECT * FROM studio_team ORDER BY team_id DESC";
+    $run = mysqli_query($GLOBALS['conn'],$qry);
+
+    while($row = mysqli_fetch_array($run)){
+        $arr[] = $row;
+    }
+
+    return $arr;
+}
+
+
+// Get team details by id
+
+function getTeamDetailsByid($team_id){
+
+    $qry = "SELECT * FROM studio_team WHERE team_id='$team_id'";
+    $run = mysqli_query($GLOBALS['conn'],$qry);
+    $num = mysqli_num_rows($run);
+
+    if($num > 0){
+        $row = mysqli_fetch_array($run);
+        
+        return $row;
+
+    }else{
+
+        return false;
+        
+    }
+}
+
+// delete team details by id
+
+function deleteTeam($team_id){
+
+    $qry = "DELETE FROM studio_team WHERE team_id='$team_id'";
     $delete = mysqli_query($GLOBALS['conn'],$qry);
 
     if($delete){

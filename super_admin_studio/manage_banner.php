@@ -1,5 +1,6 @@
 <?php
 include("includes.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +99,7 @@ include("includes.php");
                     <a href="edit_banner.php?id=<?php echo $ban_id; ?>" class="text-gray-400 hover:text-white p-2">
                       <i class="ph ph-pencil-simple"></i>
                     </a>
-                    <a href="delete_banner.php?id=<?php echo $ban_id; ?>" class="text-gray-400 hover:text-red-400 p-2">
+                    <a href="delete_banner.php?id=<?php echo $ban_id; ?>" onclick="return confirm('Are you sure you want to delete this item? This action cannot be undone!')"  class="text-gray-400 hover:text-red-400 p-2">
                       <i class="ph ph-trash"></i>
                     </a>
                   </td>
